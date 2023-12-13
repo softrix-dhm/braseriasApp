@@ -54,13 +54,30 @@ export const PedidosIns = async (
     }
 }
 
-export const PedidosSel = async (VendedorId) => {
+export const PedidosSel = async (VendedorId,FechaPedido,Local,Estado) => {
     const pool = await connectMssql()
-    try {       
-        console.log(VendedorId);                 
+    try {                                
         const result = await pool.request()
             .input('VendedorId', VendedorId)                                    
+            .input('FechaPedido', FechaPedido)
+            .input('Local', Local)
+            .input('Estado', Estado)
             .execute('SP_SEL_PEDIDOS')
+        return result.recordset              
+    } catch (ex) {
+        console.log(ex)
+        return []
+    } finally {
+        await pool.close()
+    }
+}
+
+export const PedidosDel = async (PedidoId) => {
+    const pool = await connectMssql()
+    try {                                
+        const result = await pool.request()
+            .input('PedidoId', PedidoId)                                                
+            .execute('SP_DEL_PEDIDOS')
         return result.recordset              
     } catch (ex) {
         console.log(ex)

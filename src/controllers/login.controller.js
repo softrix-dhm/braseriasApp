@@ -37,7 +37,7 @@ export const Login = async (req,res) => {
         return res.status(500).json({
             status: false,
             message: error,
-            data: r[0]
+            data: r
         });
     }
 };

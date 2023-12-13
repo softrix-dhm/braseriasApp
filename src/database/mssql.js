@@ -3,7 +3,7 @@ import mssql from "mssql"
 export const connectMssql = () => {
 
 
-  console.log(String(process.env.SQL_SERVER));
+  console.log(String(process.env.SQL_DATABASE_PRIMARY));
 
     return mssql.connect({
         user: process.env.SQL_USER,
